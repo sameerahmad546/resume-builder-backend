@@ -10,10 +10,11 @@ const login = async (req, res, next) => {
 	try {
 		const result = await authService.login(req.body, user)
 		if (result?.error && result?.message) {
-			return next(createError(400, result.message))
+			return res.status(400).json(result)
 		}
-
-		return res.status(200).json(result)
+		else{
+			return res.status(200).json(result)
+		}
 	} catch (err) {
 		console.log('loginError', err)
 		return next(err)
@@ -27,11 +28,13 @@ const login = async (req, res, next) => {
 const register = async (req, res, next) => {
 	try {
 		const result = await authService.register(req.body, user)
-		if (result?.error && result?.message) {
-			return next(createError(400, result.message))
+		if (result?.error) {
+			return res.status(400).json(result)
+		}
+		else {
+			return res.status(200).json(result)
 		}
 
-		return res.status(200).json(result)
 	} catch (err) {
 		console.log('registerError', err)
 		return next(err)

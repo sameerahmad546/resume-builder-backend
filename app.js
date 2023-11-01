@@ -9,7 +9,4 @@ db.connect()
 
 app.use('/api/auth', require('./controllers/auth/auth.routes'))
 
-
-  app.listen(config.port, () => {
-    console.log(`App listening on port ${config.port}`)
-  })
+module.exports = app

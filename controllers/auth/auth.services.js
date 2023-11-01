@@ -11,9 +11,9 @@ const login = async (reqBody, userModel) => {
 		if (user) {
 			if (await bcrypt.compare(password, user.password)) {
 				const token = jwt.sign(email, config.tokenSecret)
-				return { user: user, token: token }
+				return { user: user, token: token, message: 'Login Successfully' }
 			} else {
-				return { error: true, message: 'Invalid credentials provided' }
+				return { error: true, message: 'Invalid Password' }
 			}
 		} else {
 			return { error: true, message: 'No user found' }
@@ -41,7 +41,7 @@ const register = async (reqBody, userModel) => {
 			})
 			const token = jwt.sign(email, config.tokenSecret)
 
-			return { user: user, token: token }
+			return { user: user, token: token, message: 'User Created Successfully' }
 		} else {
 			return { error: true, message: 'User already exists' }
 		}
