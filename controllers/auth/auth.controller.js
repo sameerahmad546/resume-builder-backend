@@ -10,6 +10,7 @@ const login = async (req, res, next) => {
 	try {
 		const result = await authService.login(req.body, user)
 		if (result?.error && result?.message) {
+			
 			return res.status(400).json(result)
 		}
 		else{
